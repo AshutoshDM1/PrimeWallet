@@ -2,8 +2,16 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+
+  const navigate = useNavigate();  
+
+  const hadleClick = () => {
+    navigate("/signUp")
+  } 
+  
   const Navs = useRef(null);
   const Logos = useRef(null);
 
@@ -12,8 +20,9 @@ const NavBar = () => {
       const tl = gsap.timeline();
       tl.from(Logos.current.children, {
         x: -550,
-        stagger: 0.2,
+        stagger: -.3,
         duration: 1.2,
+        delay:1,
       });
       tl.from(Navs.current.children, {
         y: -100,
@@ -56,6 +65,7 @@ const NavBar = () => {
           <motion.h1
             whileTap={{ scale: 1.1 }}
             className="min-h-fit text-xl cursor-pointer pt-2 pb-2 pl-4 pr-4 border-white hover:border-gray-300 border-2 rounded-20r"
+            onClick={hadleClick}
           >
             SignUp
           </motion.h1>

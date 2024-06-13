@@ -12,7 +12,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 h1:focus {
   outline: none; /* Disable the default outline style */
@@ -35,3 +35,15 @@ h1:focus {
   filter: blur(5px 10px); 
 }
 
+#crsr {
+  height: 3.5vw;
+  width: 3.5vw;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 999999999;
+  pointer-events: none;
+  border: 2px solid rgba(15, 255, 251, 0.781);
+  mix-blend-mode: lighten;
+  background: #3ca8f5;
+  transform: translate(-130%, -120%);
+}
