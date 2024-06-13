@@ -12,8 +12,11 @@ html,
 body {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
-
+h1:focus {
+  outline: none; /* Disable the default outline style */
+}
 
 .main{
   background-image: url("../public/Main_bg.jpg");
