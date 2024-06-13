@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+
+.main{
+  background-image: url("../public/Main_bg.jpg");
+  background-size: cover;
+}
+
+.home {
+  box-shadow: 0 0 3rem rgb(75 33 174);
+  background: linear-gradient(220.55deg, #a8d6f9 0%, #0064cf 80% );
+}
+
+.pic:before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  filter: blur(5px 10px); 
+}
+

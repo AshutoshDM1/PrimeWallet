@@ -1,12 +1,18 @@
-import NavBar from "./components/Navbar";
+import { RecoilRoot } from "recoil";
+import Home from "./page/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div className="main h-screen w-full bg-gray-700 flex justify-center items-center  ">
-        <div className="home h-90h w-90w bg-white rounded-20r overflow-hidden">
-          <NavBar />
-        </div>  
+      <div className="main  h-screen w-full flex justify-center items-center  ">
+        <RecoilRoot>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </BrowserRouter>
+        </RecoilRoot>
       </div>
     </>
   );
