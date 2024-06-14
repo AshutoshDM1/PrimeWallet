@@ -14,33 +14,6 @@ body {
   width: 100%;
   overflow-x: hidden;
 }
-h1:focus {
-  outline: none; 
-}
-
-.main{
-  background-image: url("../public/Main_bg.jpg");
-  background-size: cover;
-}
-
-.home {
-  box-shadow: 0 0 3rem rgb(75 33 174);
-  background: linear-gradient(220.55deg, #a8d6f9 0%, #0064cf 80% );
-}
-.signup_container {
-  background: linear-gradient(220.55deg, #00e8aa 0%, #2fcbff 170% );
-
-}
-.sign_main {
-  background: linear-gradient(220.55deg, #a8ffe9 0%, #21c8ff 80% );
-
-}
-.pic:before {
-  content: "";
-  height: 100%;
-  width: 100%;
-  filter: blur(5px 10px); 
-}
 
 #crsr {
   height: 3.5vw;
@@ -53,4 +26,36 @@ h1:focus {
   mix-blend-mode: lighten;
   background: #3ca8f5;
   transform: translate(-130%, -120%);
+}
+h1:focus {
+  outline: none;
+}
+
+.main {
+  background-image: url("../public/Main_bg.jpg");
+  background-size: cover;
+}
+
+.home {
+  box-shadow: 0 0 3rem rgb(75 33 174);
+  background: linear-gradient(220.55deg, #a8d6f9 0%, #0064cf 80%);
+}
+.signup_container {
+  background: linear-gradient(220.55deg, #00e8aa 0%, #2fcbff 170%);
+}
+.sign_main {
+  background: linear-gradient(220.55deg, #a8ffe9 0%, #21c8ff 80%);
+}
+
+.pic:before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  filter: blur(5px 10px);
+}
+.btn {
+  background: #0076c4;
+}
+.btn:hover {
+  background: #0f9fff;
 }
