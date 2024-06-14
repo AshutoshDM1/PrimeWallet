@@ -36,7 +36,7 @@ const Home = () => {
           opacity: 0,
         },
         {
-          x:480,
+          x:430,
           stagger:.4,
           scale:1,
           duration:1.3,
