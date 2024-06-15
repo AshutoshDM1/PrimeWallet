@@ -5,13 +5,15 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SignUp from "./page/signUp";
+import Login from "./page/Login";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const cursorCircle = useRef(null);
   useGSAP(() => {
     window.addEventListener("mousemove", function (dets) {
       gsap.to(cursorCircle.current, {
-        duration:.8,
+        duration: 0.8,
         left: dets.x,
         top: dets.y,
       });
@@ -24,9 +26,11 @@ function App() {
       <div className="main  h-screen w-full flex justify-center items-center  ">
         <RecoilRoot>
           <BrowserRouter>
+            <Toaster position="top-right" reverseOrder={false} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/signUp" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </BrowserRouter>
         </RecoilRoot>

@@ -5,13 +5,12 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate();  
+  const hadleClick = (path) => {
+    navigate(path);
+  };
 
-  const hadleClick = () => {
-    navigate("/signUp")
-  } 
-  
   const Navs = useRef(null);
   const Logos = useRef(null);
 
@@ -20,9 +19,9 @@ const NavBar = () => {
       const tl = gsap.timeline();
       tl.from(Logos.current.children, {
         x: -550,
-        stagger: -.3,
+        stagger: -0.3,
         duration: 1.2,
-        delay:1,
+        delay: 1,
       });
       tl.from(Navs.current.children, {
         y: -100,
@@ -65,13 +64,14 @@ const NavBar = () => {
           <motion.h1
             whileTap={{ scale: 1.1 }}
             className="min-h-fit text-xl cursor-pointer pt-2 pb-2 pl-4 pr-4 border-white hover:border-gray-300 border-2 rounded-20r"
-            onClick={hadleClick}
+            onClick={() => hadleClick('/signUp')}
           >
             SignUp
           </motion.h1>
           <motion.h1
             whileTap={{ scale: 1.1 }}
             className="min-h-fit text-xl cursor-pointer pt-2 pb-2 pl-4 pr-4 border-white hover:border-gray-300 border-2 rounded-20r"
+            onClick={ () => hadleClick("/login")}
           >
             Login
           </motion.h1>

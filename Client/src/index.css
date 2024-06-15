@@ -32,7 +32,7 @@ h1:focus {
 }
 
 .main {
-  background-image: url("../public/Main_bg.jpg");
+  background-image: url("./Main_bg.jpg");
   background-size: cover;
 }
 

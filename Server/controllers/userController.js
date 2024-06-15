@@ -1,5 +1,5 @@
 import { User } from "../database/index.js";
-import config  from "../config/index.js"; 
+import config from "../config/index.js";
 import jwt from "jsonwebtoken";
 import { hashingPass, checkHashingPass } from "../utils/bcryptUtils.js";
 
@@ -43,15 +43,17 @@ const login = async (req, res) => {
         res.json({
           token,
         });
+      } else if (match === false) {
+        res.status(411).json({
+          message: "Incorrect password",
+        });
       }
     } else {
-      res.status(411).json({
-        message: "Incorrect email and pass",
-      });
+      return res.status(401).json({ message: "Invalid Username or Password" });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
 
-export { signup, login};
+export { signup, login };

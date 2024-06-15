@@ -15,12 +15,13 @@ let checkHashingPass = async (enterPassword, hashedPassword) => {
   try {
     const match = await bcrypt.compare(enterPassword, hashedPassword);
     if (match) {
-      return match;
-    } else {
-      return res.status(411).json({ massage: "Passwords does not match!" });
-    }
+    return match;
+  }
+  else {
+    res.status(411).json({ massage: "Password did not match" }) }
   } catch (err) {
     console.error(err);
+    return false
   }
 };
 
