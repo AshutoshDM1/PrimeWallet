@@ -8,16 +8,17 @@ import { TextField } from "@mui/material";
 import "animate.css";
 import { getToken, loginUser } from "../services/api";
 import toast, { Toaster } from "react-hot-toast";
+import Loader from "../components/Loader";
 
 const Login = () => {
   useEffect(() => {
     const token = getToken();
     if (token !== null) {
-      toast.success('You are already logged in!');
+      toast.success("You are already logged in!");
     }
   }, []);
-  
 
+  const [loading, setLoading] = useState(false);
   const [userData, setuserData] = useState({
     username: "",
     password: "",
@@ -29,6 +30,7 @@ const Login = () => {
   };
   const handleClick = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const { username, password, confirmPassword } = userData;
     const userLoginData = { username, password };
     if (password !== confirmPassword) {
@@ -38,6 +40,9 @@ const Login = () => {
       const response = await loginUser(userLoginData);
     } catch (error) {
       toast.error(`Server error: ${error.message}`);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
   const home = useRef(null);
@@ -149,59 +154,69 @@ const Login = () => {
                     Welcome to PrimeWallet
                   </h1>
                 </div>
-                <div className="h-80h pt-24 w-full   flex flex-col items-center justify-evenly overflow-hidden">
-                  <div className="input_container w-full flex flex-col justify-evenly mb-8 input_container h-full ">
-                    <h1 className="mb-2 font-bold text-1vw uppercase ">
-                      USERNAME
-                    </h1>
-                    <TextField
-                      name="username"
-                      onChange={handleInput}
-                      className="w-90w  h-fit rounded-lg "
-                      id="outlined-basic"
-                      label="Enter Username"
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="input_container w-full flex flex-col justify-evenly mb-8">
-                    <h1 className="mb-2  font-bold text-1vw uppercase ">
-                      Enter Password
-                    </h1>
-                    <TextField
-                      onChange={handleInput}
-                      name="password"
-                      className="w-90w rounded-lg "
-                      id="outlined-basic"
-                      label="Enter Password"
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="input_container w-full flex flex-col justify-evenly mb-8">
-                    <h1 className="mb-2  font-bold text-1vw uppercase ">
-                      Confirm Password
-                    </h1>
-                    <TextField
-                      onChange={handleInput}
-                      name="confirmPassword"
-                      className="w-90w   rounded-lg "
-                      id="outlined-basic"
-                      label="************"
-                      variant="outlined"
-                    />
-                  </div>
-                  <button
-                    onClick={handleClick}
-                    className="btn rounded-20r h-40h w-60w  text-white text-bold text-1.3vw "
-                  >
-                    Login
-                  </button>
-                  <div className="text2 h-50h w-60w overflow-hidden text-black flex items-center justify-evenly text-1vw font-medium">
-                    <h1>Doesn't Have Accoute </h1>
-                    <span className="text-blue-500  cursor-pointer hover:text-blue-400">
-                      {" "}
-                      Register For Free{" "}
-                    </span>
-                  </div>
+                <div className="h-80h pt-24 w-full  flex flex-col items-center justify-evenly overflow-hidden">
+                  {loading ? (
+                    <>
+                      <div className="loading-spinner">
+                        <Loader />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="input_container w-full flex flex-col justify-evenly mb-8 input_container h-full ">
+                        <h1 className="mb-2 font-bold text-1vw uppercase ">
+                          USERNAME
+                        </h1>
+                        <TextField
+                          name="username"
+                          onChange={handleInput}
+                          className="w-90w  h-fit rounded-lg "
+                          id="outlined-basic"
+                          label="Enter Username"
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="input_container w-full flex flex-col justify-evenly mb-8">
+                        <h1 className="mb-2  font-bold text-1vw uppercase ">
+                          Enter Password
+                        </h1>
+                        <TextField
+                          onChange={handleInput}
+                          name="password"
+                          className="w-90w rounded-lg "
+                          id="outlined-basic"
+                          label="Enter Password"
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="input_container w-full flex flex-col justify-evenly mb-8">
+                        <h1 className="mb-2  font-bold text-1vw uppercase ">
+                          Confirm Password
+                        </h1>
+                        <TextField
+                          onChange={handleInput}
+                          name="confirmPassword"
+                          className="w-90w   rounded-lg "
+                          id="outlined-basic"
+                          label="************"
+                          variant="outlined"
+                        />
+                      </div>
+                      <button
+                        onClick={handleClick}
+                        className="btn rounded-20r h-40h w-60w  text-white text-bold text-1.3vw "
+                      >
+                        Login
+                      </button>
+                      <div className="text2 h-50h w-60w overflow-hidden text-black flex items-center justify-evenly text-1vw font-medium">
+                        <h1>Doesn't Have Accoute </h1>
+                        <span className="text-blue-500  cursor-pointer hover:text-blue-400">
+                          {" "}
+                          Register For Free{" "}
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

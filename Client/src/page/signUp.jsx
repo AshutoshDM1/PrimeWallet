@@ -7,7 +7,8 @@ import pic2 from "../assets/3d-male-character-happy.png";
 import { TextField } from "@mui/material";
 import "animate.css";
 import { signUpUser } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [userData, setuserData] = useState({
@@ -15,6 +16,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInput = (event) => {
     setuserData({ ...userData, [event.target.name]: event.target.value });
@@ -22,8 +24,17 @@ const SignUp = () => {
 
   const handleClick = async (event) => {
     event.preventDefault();
-    await signUpUser(userData);
+    setLoading(true);
+    try {
+      await signUpUser(userData);
+    } catch (error) {
+      toast.error(`Server error: ${error}`);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const home = useRef(null);
   const Container = useRef(null);
   const Container2 = useRef(null);
@@ -79,9 +90,10 @@ const SignUp = () => {
       scale: 0,
     });
   };
+
   useGSAP(
     () => {
-      // animateSignUp();
+      animateSignUp();
     },
     { scope: home, Container }
   );
@@ -111,7 +123,7 @@ const SignUp = () => {
             <div className=" h-95h w-40w  rounded-20r ml-6 flex items-center justify-center">
               <div
                 ref={HeadingElements}
-                className="login_div h-90h w-90w text-black flex flex-col items-center justify-center"
+                className="login_div h-90h w-90w text-black  flex flex-col items-center justify-center"
               >
                 <div className="text h-fit w-fit  overflow-hidden">
                   <h1 className="mb-4 h-fit  font-bold text-2.5vw tracking-wide leading-none uppercase rounded-full overflow-hidden ">
@@ -123,52 +135,61 @@ const SignUp = () => {
                     Welcome to PrimeWallet
                   </h1>
                 </div>
-                <div className="h-80h pt-24 w-full   flex flex-col items-center justify-evenly overflow-hidden">
-                  <div className="input_container w-full flex flex-col justify-evenly mb-8 input_container h-full ">
-                    <h1 className="mb-2 font-bold text-1vw uppercase ">
-                      USERNAME
-                    </h1>
-                    <TextField
-                      onChange={handleInput}
-                      name="username"
-                      className="w-90w  h-fit rounded-lg "
-                      id="outlined-basic"
-                      label="Enter Username"
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="input_container w-full flex flex-col justify-evenly mb-8">
-                    <h1 className="mb-2  font-bold text-1vw uppercase ">
-                      Email
-                    </h1>
-                    <TextField
-                      onChange={handleInput}
-                      name="email"
-                      className="w-90w rounded-lg "
-                      id="outlined-basic"
-                      label="Enter Email"
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="input_container w-full flex flex-col justify-evenly mb-8">
-                    <h1 className="mb-2  font-bold text-1vw uppercase ">
-                      Password
-                    </h1>
-                    <TextField
-                      onChange={handleInput}
-                      name="password"
-                      className="w-90w   rounded-lg "
-                      id="outlined-basic"
-                      label="Enter Password"
-                      variant="outlined"
-                    />
-                  </div>
-                  <button
-                    onClick={handleClick}
-                    className="btn rounded-20r h-40h w-60w bg-gray-600 text-white text-bold text-1.3vw "
-                  >
-                    SignUp
-                  </button>
+
+                <div className="h-80h pt-24 w-full  flex flex-col items-center justify-evenly overflow-hidden">
+                  {loading ? (
+                    <div className="loading-spinner">
+                      <Loader />
+                    </div>
+                  ) : (
+                    <>
+                      <div className="input_container w-full flex flex-col justify-evenly mb-8 input_container h-full ">
+                        <h1 className="mb-2 font-bold text-1vw uppercase ">
+                          USERNAME
+                        </h1>
+                        <TextField
+                          onChange={handleInput}
+                          name="username"
+                          className="w-90w  h-fit rounded-lg "
+                          id="outlined-basic"
+                          label="Enter Username"
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="input_container w-full flex flex-col justify-evenly mb-8">
+                        <h1 className="mb-2  font-bold text-1vw uppercase ">
+                          Email
+                        </h1>
+                        <TextField
+                          onChange={handleInput}
+                          name="email"
+                          className="w-90w rounded-lg "
+                          id="outlined-basic"
+                          label="Enter Email"
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="input_container w-full flex flex-col justify-evenly mb-8">
+                        <h1 className="mb-2  font-bold text-1vw uppercase ">
+                          Password
+                        </h1>
+                        <TextField
+                          onChange={handleInput}
+                          name="password"
+                          className="w-90w   rounded-lg "
+                          id="outlined-basic"
+                          label="Enter Password"
+                          variant="outlined"
+                        />
+                      </div>
+                      <button
+                        onClick={handleClick}
+                        className="btn rounded-20r h-40h w-60w bg-gray-600 text-white text-bold text-1.3vw "
+                      >
+                        SignUp
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
