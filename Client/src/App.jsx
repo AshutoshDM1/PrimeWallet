@@ -23,7 +23,13 @@ function App() {
   return (
     <>
       <div ref={cursorCircle} id="crsr"></div>
-      <div className="main  h-screen w-full flex justify-center items-center  ">
+      <div
+        style={{
+          backgroundImage: 'url("./Main_bg.jpg")',
+          backgroundSize: "cover",
+        }}
+        className="main h-screen w-full flex justify-center items-center  "
+      >
         <RecoilRoot>
           <BrowserRouter>
             <Toaster position="top-right" reverseOrder={false} />
