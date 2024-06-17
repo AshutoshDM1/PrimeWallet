@@ -7,6 +7,7 @@ import gsap from "gsap";
 import SignUp from "./page/signUp";
 import Login from "./page/Login";
 import { Toaster } from "react-hot-toast";
+import DashBoard from "./page/DashBoard";
 
 function App() {
   const cursorCircle = useRef(null);
@@ -37,6 +38,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/signUp" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<DashBoard/>} />
             </Routes>
           </BrowserRouter>
         </RecoilRoot>

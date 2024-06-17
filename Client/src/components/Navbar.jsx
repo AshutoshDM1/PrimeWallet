@@ -76,8 +76,10 @@ const NavBar = () => {
             Login
           </motion.h1>
           <motion.h1
+
             whileTap={{ scale: 1.1 }}
             className="flex justify-center items-center h-10 w-12vw text-xl cursor-pointer text-white bg-purple-600 border-white rounded-20r hover:bg-purple-500"
+            onClick={ () => hadleClick("/dashboard")}
           >
             Get-Started
           </motion.h1>
