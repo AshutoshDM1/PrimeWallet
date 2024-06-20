@@ -1,8 +1,8 @@
 import { Router } from "express";
-import userValidate from "../Middlewares/userValidate.js";
+import {userMiddleware} from "../Middlewares/userValidate.js";
 import { registerSchema, deleteUserSchema } from '../schemas/zodSchema.js';
 import zodValidate from '../Middlewares/zodValidate.js';
-import { signup, login, } from "../controllers/userController.js";
+import { signup, login,users } from "../controllers/userController.js";
 
 const router = Router();
 
@@ -11,5 +11,6 @@ router.get("/", (req, res) => {
 });
 router.post("/signup", zodValidate(registerSchema), signup);
 router.post("/login", login);
+router.get("/users", userMiddleware , users);
 
 export default router;

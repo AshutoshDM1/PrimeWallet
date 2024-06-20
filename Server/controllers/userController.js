@@ -55,5 +55,13 @@ const login = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+const users = async (req, res) => {
+  try {
+      const allUsers = await User.find();
+      res.status(200).json({ allUsers });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
-export { signup, login };
+export { signup, login , users };
