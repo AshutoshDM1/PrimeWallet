@@ -13,34 +13,6 @@ export const users = atom({
       username: "MoDx",
     },
     {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
-      _id: "1",
-      username: "MoDx",
-    },
-    {
       _id: "2",
       username: "JaneDoe",
     },
@@ -51,6 +23,30 @@ export const users = atom({
     {
       _id: "4",
       username: "AliceWonder",
+    },
+    {
+      _id: "5",
+      username: "BobBuilder",
+    },
+    {
+      _id: "5",
+      username: "BobBuilder",
+    },
+    {
+      _id: "5",
+      username: "BobBuilder",
+    },
+    {
+      _id: "5",
+      username: "BobBuilder",
+    },
+    {
+      _id: "5",
+      username: "BobBuilder",
+    },
+    {
+      _id: "5",
+      username: "BobBuilder",
     },
     {
       _id: "5",

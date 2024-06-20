@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       height: {
+        "5h": "5%",
         "7h": "7%",
         "8h": "8%",
         "10h": "10%",
@@ -49,6 +50,7 @@ export default {
       },
       fontSize: {
         "1vw": "1vw",
+        "1.2vw": "1.2vw",
         "1.3vw": "1.3vw",
         "1.5vw": "1.5vw",
         "2vw": "2vw",

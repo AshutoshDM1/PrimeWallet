@@ -5,7 +5,7 @@
 }
 
 .user_container::-webkit-scrollbar-thumb {
-  background: rgba(225, 225, 225, 0.753);
+  background: rgba(44, 128, 255, 0.753);
   border-radius: 8px;
   transition: ease-in 2;
   cursor: pointer;
@@ -13,7 +13,7 @@
 }
 
 .user_container::-webkit-scrollbar-thumb:hover {
-  background: rgb(234, 234, 234);
+  background: rgb(21, 91, 255);
   transition: ease-in 1s;
   transform: scale(2)
 }
@@ -25,4 +25,24 @@
 
 .user_container {
   overflow-y: auto;
+}
+
+.dashboard_blance  {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+}
+.user_container_main {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+  padding: 1vw;
+  padding-right: 0;
+  border-radius: 15px;
+}
+.dashboard_main {
+  background: linear-gradient(220.55deg, #ffdb80 0%, #ffffff 170%);
+}
+
+.dashboard_blance {
+  margin-top: 10vh;
+}
+.input {
+  height: 1em;
 }
