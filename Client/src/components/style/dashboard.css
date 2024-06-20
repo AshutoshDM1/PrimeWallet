@@ -1,0 +1,28 @@
+.user_container::-webkit-scrollbar {
+  width: 12px;
+  height: 8px;
+  background-color: transparent;
+}
+
+.user_container::-webkit-scrollbar-thumb {
+  background: rgba(225, 225, 225, 0.753);
+  border-radius: 8px;
+  transition: ease-in 2;
+  cursor: pointer;
+
+}
+
+.user_container::-webkit-scrollbar-thumb:hover {
+  background: rgb(234, 234, 234);
+  transition: ease-in 1s;
+  transform: scale(2)
+}
+
+.user_container::-webkit-scrollbar-track {
+  background-color: transparent;
+  display: none;
+}
+
+.user_container {
+  overflow-y: auto;
+}

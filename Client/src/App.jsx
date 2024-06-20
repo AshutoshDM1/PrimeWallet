@@ -31,17 +31,19 @@ function App() {
         }}
         className="main h-screen w-full flex justify-center items-center  "
       >
-        <RecoilRoot>
-          <BrowserRouter>
-            <Toaster position="top-right" reverseOrder={false} />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signUp" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<DashBoard/>} />
-            </Routes>
-          </BrowserRouter>
-        </RecoilRoot>
+        {" "}
+
+          <RecoilRoot>
+            <BrowserRouter>
+              <Toaster position="top-right" reverseOrder={false} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signUp" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<DashBoard />} />
+              </Routes>
+            </BrowserRouter>
+          </RecoilRoot>
       </div>
     </>
   );
