@@ -1,57 +1,18 @@
 import { atom, selector } from "recoil";
+import { getUsers } from "../services/api";
 
 export const dashBoardState = atom({
   key: "dashBoardState",
-  default: [, "Home", "Dashboard", "History", "Profile", "Settings", "Logout"],
+  default: ["Home", "Dashboard", "History", "Profile", "Settings", "Logout"],
 });
 
-export const users = atom({
-  key: "users",
-  default: [
-    {
-      _id: "1",
-      username: "MoDx",
+export const usersState = atom({
+  key: "usersAtoms",
+  default: selector({
+    key: 'usersSelector',
+    get: async () => { 
+      const data = await getUsers();
+      return data; 
     },
-    {
-      _id: "2",
-      username: "JaneDoe",
-    },
-    {
-      _id: "3",
-      username: "JohnSmith",
-    },
-    {
-      _id: "4",
-      username: "AliceWonder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-    {
-      _id: "5",
-      username: "BobBuilder",
-    },
-  ],
+  }),
 });
-

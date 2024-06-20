@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/Navbar";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { dashBoardState, users } from "../state/atoms";
+import { dashBoardState, usersState } from "../state/atoms";
 import SideNavs from "../components/SideNavs.jsx";
 import { Avatar, Button, Input, TextField } from "@mui/material";
 import pic from "../assets/classroom of elit eprofile pic-min.png";
@@ -11,7 +11,10 @@ import "../components/style/dashboard.css";
 const DashBoard = () => {
   const navigate = useNavigate();
   const SideNav = useRecoilValue(dashBoardState);
-  const userList = useRecoilValue(users);
+  const userList = useRecoilValue(usersState);
+  
+  console.log(userList)
+
   return (
     <>
       <div className="h-screen w-full flex text-white bg-white">
@@ -64,7 +67,7 @@ const DashBoard = () => {
               <div className="user_container_main bg-white h-90h w-80w ">
                 <h1 className="h-5h font-bold text-1.5vw">Send Money </h1>
                 <div className="user_container pr-8 h-90h  mt-8 text-black overflow-auto">
-                  {userList.map((item, index) => {
+                  {userList.allUsers.map((item, index) => {
                     console.log(item.username);
                     return (
                       <div
