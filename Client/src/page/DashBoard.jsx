@@ -11,9 +11,7 @@ import "../components/style/dashboard.css";
 const DashBoard = () => {
   const navigate = useNavigate();
   const SideNav = useRecoilValue(dashBoardState);
-  const userList = useRecoilValue(usersState);
-  
-  console.log(userList)
+  const userList = useRecoilValue(usersState)
 
   return (
     <>
