@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 import { getUsers } from "../services/api";
+import { userSelector } from "./selector";
 
 export const dashBoardState = atom({
   key: "dashBoardState",
@@ -8,11 +9,5 @@ export const dashBoardState = atom({
 
 export const usersState = atom({
   key: "usersAtoms",
-  default: selector({
-    key: 'usersSelector',
-    get: async () => { 
-      const data = await getUsers();
-      return data; 
-    },
-  }),
+  default: userSelector,
 });

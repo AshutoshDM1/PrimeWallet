@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/Navbar";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilStateLoadable, useRecoilValue } from "recoil";
 import { dashBoardState, usersState } from "../state/atoms";
 import SideNavs from "../components/SideNavs.jsx";
 import { Avatar, Button, Input, TextField } from "@mui/material";
 import pic from "../assets/classroom of elit eprofile pic-min.png";
 import { useNavigate } from "react-router-dom";
 import "../components/style/dashboard.css";
+import Loader from "../components/Loader.jsx";
 
 const DashBoard = () => {
   const navigate = useNavigate();
   const SideNav = useRecoilValue(dashBoardState);
-  const userList = useRecoilValue(usersState)
+  const [userList , setuserList ] = useRecoilStateLoadable(usersState);
+
+
+  if (userList.state === "loading" ) {
+    return (
+      <>
+      < Loader/>
+      </>
+    )
+  }
+  if (userList.state === "hasError" ) {
+    return (
+      <>
+      <h1>Error</h1>
+      </>
+    )
+  }
 
   return (
     <>
@@ -65,8 +82,7 @@ const DashBoard = () => {
               <div className="user_container_main bg-white h-90h w-80w ">
                 <h1 className="h-5h font-bold text-1.5vw">Send Money </h1>
                 <div className="user_container pr-8 h-90h  mt-8 text-black overflow-auto">
-                  {userList.allUsers.map((item, index) => {
-                    console.log(item.username);
+                  {userList.contents.allUsers.map((item, index) => {
                     return (
                       <div
                         key={item._id}
@@ -78,7 +94,7 @@ const DashBoard = () => {
                         <button
                           className="h-90h w-15w bg-blue-600 text-white font-medium rounded-20r text-1vw"
                           
-                          onClick={() => navigate(`/transfer`)}
+                          onClick={() => navigate(`/dashboard/transaction`)}
                         >
                           Send
                         </button>

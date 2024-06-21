@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -60,3 +61,9 @@ h1:focus {
   background: #0f9fff;
 }
 
+.trans-header {
+  font-family: "Covered By Your Grace", cursive;
+  font-weight: 500;
+  font-size: 2.8vw;
+  font-style: normal;
+}

@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        box: '0 0 1rem rgba(0, 0, 0, 0.3)',
+      },
       height: {
         "5h": "5%",
         "7h": "7%",
@@ -53,6 +56,7 @@ export default {
         "1.2vw": "1.2vw",
         "1.3vw": "1.3vw",
         "1.5vw": "1.5vw",
+        "1.7vw": "1.7vw",
         "2vw": "2vw",
         "2.5vw": "2.5vw",
         "3vw": "3vw",

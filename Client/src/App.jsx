@@ -8,6 +8,8 @@ import SignUp from "./page/signUp";
 import Login from "./page/Login";
 import { Toaster } from "react-hot-toast";
 import DashBoard from "./page/DashBoard";
+import Transaction from "./page/Transaction.jsx";
+import MainPic from "./assets/Main_bg.jpg";
 
 function App() {
   const cursorCircle = useRef(null);
@@ -26,7 +28,7 @@ function App() {
       <div ref={cursorCircle} id="crsr"></div>
       <div
         style={{
-          backgroundImage: 'url("./Main_bg.jpg")',
+          backgroundImage: `url("${MainPic}")`,
           backgroundSize: "cover",
         }}
         className="main h-screen w-full flex justify-center items-center  "
@@ -41,6 +43,7 @@ function App() {
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<DashBoard />} />
+                <Route path="/dashboard/transaction" element={<Transaction />} />
               </Routes>
             </BrowserRouter>
           </RecoilRoot>

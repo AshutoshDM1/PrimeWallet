@@ -8,7 +8,6 @@ const getTransactionHistory = (res , req ) => {
 
 }
 
-
 export {
   getAccountBalance,
   transferMoney,

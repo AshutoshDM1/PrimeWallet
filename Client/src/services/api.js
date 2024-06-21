@@ -52,7 +52,6 @@ export const loginUser = async (userData) => {
 export const getUsers = async () => {
   try {
     const jwtToken = getToken();
-    console.log(jwtToken)
     const response = await axios.get(
       `${API_URL_User}/users`,
       {
