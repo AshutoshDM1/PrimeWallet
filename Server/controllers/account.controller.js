@@ -1,15 +1,13 @@
-const getAccountBalance = (res , req ) => {
-  
-}
-const transferMoney = (res , req ) => {
 
-}
-const getTransactionHistory = (res , req ) => {
 
-}
+const getAccountBalance = ( req , res ) => {
+  res.json({ message: "Successful" });
+};
+const transferMoney = ( req , res ) => {
+  res.json({ message: "Successful" });
+};
+const getTransactionHistory = ( req , res ) => {
+  res.json({ message: "Successful" });
+};
 
-export {
-  getAccountBalance,
-  transferMoney,
-  getTransactionHistory,
-}
+export { getAccountBalance, transferMoney, getTransactionHistory };

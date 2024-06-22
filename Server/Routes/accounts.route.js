@@ -8,7 +8,7 @@ import {userMiddleware} from "../Middlewares/userValidate.js";
 
 const router = Router();
 
-router.post("/balance", userMiddleware, getAccountBalance);
+router.post("/balance", userMiddleware,  getAccountBalance);
 router.post("/transfer", userMiddleware, transferMoney);
 router.get("/transaction-history", userMiddleware, getTransactionHistory);
 

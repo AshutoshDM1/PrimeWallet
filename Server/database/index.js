@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
 
 const accountSchema = new mongoose.Schema({
   userID: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
@@ -31,12 +31,12 @@ const accountSchema = new mongoose.Schema({
 const transactionSchema = new mongoose.Schema(
   {
     userID: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     counterUser: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -55,4 +55,4 @@ const transactionSchema = new mongoose.Schema(
 const Transaction = mongoose.model("Transaction", transactionSchema);
 const User = mongoose.model("User", UserSchema);
 const Account = mongoose.model("Account", accountSchema);
-export { User , Account ,Transaction };
+export { User, Account, Transaction };
