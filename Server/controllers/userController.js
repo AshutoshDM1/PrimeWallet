@@ -13,7 +13,7 @@ const signup = async (req, res) => {
       return res.status(400).json({ message: "Username already exists" });
     }
     let hashedPassword = await hashingPass(password);
-
+    
     await User.create({
       username: username,
       email: email,
