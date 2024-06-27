@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import { getUsers } from "../services/api";
+import { getBalance, getUsers } from "../services/api";
 
 const userSelector = selector({
   key: 'usersSelctor',
@@ -8,6 +8,13 @@ const userSelector = selector({
     return data; 
   },
 })
+const getAccountBalanceSelector = selector({
+  key: 'balanceSelctor',
+  get: async () => { 
+    const data = await getBalance();
+    return data; 
+  },
+})
 
-export { userSelector };
+export { userSelector , getAccountBalanceSelector };
 

@@ -4,12 +4,12 @@ import {
   transferMoney,
   getTransactionHistory,
 } from "../controllers/account.controller.js";
-import {userMiddleware} from "../Middlewares/userValidate.js";
+import { userMiddleware } from "../Middlewares/userValidate.js";
 
 const router = Router();
 
-router.post("/balance", userMiddleware,  getAccountBalance);
-router.post("/transfer", userMiddleware, transferMoney);
+router.get("/balance", userMiddleware, getAccountBalance);
+router.post("/transfer/", userMiddleware, transferMoney);
 router.get("/transaction-history", userMiddleware, getTransactionHistory);
 
 export default router;

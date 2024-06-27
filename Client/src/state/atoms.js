@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 import { getUsers } from "../services/api";
-import { userSelector } from "./selector";
+import { getAccountBalanceSelector, userSelector } from "./selector";
 
 export const dashBoardState = atom({
   key: "dashBoardState",
@@ -10,4 +10,9 @@ export const dashBoardState = atom({
 export const usersState = atom({
   key: "usersAtoms",
   default: userSelector,
+});
+
+export const balanceState = atom({
+  key: "balanceAtoms",
+  default: getAccountBalanceSelector,
 });

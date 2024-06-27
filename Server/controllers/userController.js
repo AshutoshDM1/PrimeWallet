@@ -1,4 +1,4 @@
-import { User } from "../database/index.js";
+import { Account, User } from "../database/index.js";
 import config from "../config/index.js";
 import jwt from "jsonwebtoken";
 import { hashingPass, checkHashingPass } from "../utils/bcryptUtils.js";
@@ -13,7 +13,7 @@ const signup = async (req, res) => {
       return res.status(400).json({ message: "Username already exists" });
     }
     let hashedPassword = await hashingPass(password);
-    
+
     await User.create({
       username: username,
       email: email,
@@ -39,7 +39,15 @@ const login = async (req, res) => {
           },
           jwtSecret
         );
-
+        const existingAccount = await Account.findOne({
+          userID: existingUser._id,
+        });
+        if (!existingAccount) {
+          await Account.create({
+            userID: existingUser._id,
+            balance: 5000,
+          });
+        }
         res.json({
           token,
         });
@@ -57,11 +65,11 @@ const login = async (req, res) => {
 };
 const users = async (req, res) => {
   try {
-      const allUsers = await User.find();
-      res.status(200).json({ allUsers });
+    const allUsers = await User.find();
+    res.status(200).json({ allUsers });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
 
-export { signup, login , users };
+export { signup, login, users };

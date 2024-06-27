@@ -1,6 +1,27 @@
 import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
+import { transferMoney } from "../services/api";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Transaction = () => {
+  const { userId } = useParams();
+  let [inputMoney, setInputMoney] = useState("");
+  const handleInputMoney = (event) => {
+    setInputMoney(event.target.value);
+  };
+  const handleSendMoney = async () => {
+    let data = {
+      to: userId,
+      amount : inputMoney 
+    };
+    try {
+      await transferMoney(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <div className="h-screen w-full flex justify-center items-center ">
@@ -19,6 +40,8 @@ const Transaction = () => {
                 Amount
               </InputLabel>
               <Input
+                value={inputMoney}
+                onChange={handleInputMoney}
                 placeholder="min. 1$"
                 id="standard-adornment-amount"
                 startAdornment={
@@ -26,7 +49,10 @@ const Transaction = () => {
                 }
               />
             </FormControl>
-            <button className="bg-blue-500 h-20h w-30w mt-4 flex flex-col items-center justify-center text-white font-bold text-1.3vw rounded-xl hover:bg-blue-600 border-2 ">
+            <button
+              onClick={handleSendMoney}
+              className="bg-blue-500 h-20h w-30w mt-4 flex flex-col items-center justify-center text-white font-bold text-1.3vw rounded-xl hover:bg-blue-600 border-2 "
+            >
               Send
             </button>
           </div>

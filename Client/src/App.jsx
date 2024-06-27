@@ -43,7 +43,7 @@ function App() {
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<DashBoard />} />
-                <Route path="/dashboard/transaction" element={<Transaction />} />
+                <Route path="/dashboard/transaction/:userId" element={<Transaction />} />
               </Routes>
             </BrowserRouter>
           </RecoilRoot>
