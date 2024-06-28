@@ -3,34 +3,51 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../services/api";
+import toast from "react-hot-toast";
+import { useRecoilState } from "recoil";
+import { loadingState, navState } from "../state/atoms";
 
 const NavBar = () => {
   const navigate = useNavigate();
 
+  const [navloading, navLoading] = useRecoilState(navState);
+
   const hadleClick = (path) => {
     navigate(path);
+  };
+  const hadleClickDashboard = (path) => {
+    const token = getToken();
+    if (token !== null) {
+      toast.success("Login Already going to Dashborad in 3 sec");
+      setTimeout(() => {
+        navigate(path);
+      } , 2000);
+    } else {
+      toast.error("You Dont have Auth Token Please Login Again");
+    }
   };
 
   const Navs = useRef(null);
   const Logos = useRef(null);
-
+  const NavAnimation = () => {
+    const tl = gsap.timeline();
+    tl.from(Logos.current.children, {
+      x: -550,
+      stagger: -0.3,
+      duration: 1.2,
+      delay: 1,
+    });
+    tl.from(Navs.current.children, {
+      y: -100,
+      stagger: 0.2,
+    });
+  }
   useGSAP(
     () => {
-      const tl = gsap.timeline();
-      tl.from(Logos.current.children, {
-        x: -550,
-        stagger: -0.3,
-        duration: 1.2,
-        delay: 1,
-      });
-      tl.from(Navs.current.children, {
-        y: -100,
-        stagger: 0.2,
-      });
-
-      return () => {
-        tl.kill();
-      };
+      if (navloading === 0) {
+        NavAnimation();
+      }
     },
     { scope: Navs, Logos }
   );
@@ -64,22 +81,28 @@ const NavBar = () => {
           <motion.h1
             whileTap={{ scale: 1.1 }}
             className="min-h-fit text-xl cursor-pointer pt-2 pb-2 pl-4 pr-4 border-white hover:border-gray-300 border-2 rounded-20r"
-            onClick={() => hadleClick('/signUp')}
+            onClick={() => hadleClick("/")}
+          >
+            Home
+          </motion.h1>
+          <motion.h1
+            whileTap={{ scale: 1.1 }}
+            className="min-h-fit text-xl cursor-pointer pt-2 pb-2 pl-4 pr-4 border-white hover:border-gray-300 border-2 rounded-20r"
+            onClick={() => hadleClick("/signUp")}
           >
             SignUp
           </motion.h1>
           <motion.h1
             whileTap={{ scale: 1.1 }}
             className="min-h-fit text-xl cursor-pointer pt-2 pb-2 pl-4 pr-4 border-white hover:border-gray-300 border-2 rounded-20r"
-            onClick={ () => hadleClick("/login")}
+            onClick={() => hadleClick("/login")}
           >
             Login
           </motion.h1>
           <motion.h1
-
             whileTap={{ scale: 1.1 }}
             className="flex justify-center items-center h-10 w-12vw text-xl cursor-pointer text-white bg-purple-600 border-white rounded-20r hover:bg-purple-500"
-            onClick={ () => hadleClick("/dashboard")}
+            onClick={() => hadleClickDashboard("/dashboard")}
           >
             Get-Started
           </motion.h1>

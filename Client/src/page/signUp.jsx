@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import NavBar from "../components/Navbar";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import pic1 from "../assets/3d_phone_money.png";
 import pic2 from "../assets/3d-male-character-happy.png";
@@ -9,14 +9,25 @@ import "animate.css";
 import { signUpUser } from "../services/api";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import { loadingState, navState } from "../state/atoms";
+import { useRecoilState } from "recoil";
 
 const SignUp = () => {
+
+  const [animeloading, setanimeLoading] = useRecoilState(loadingState);
+  const [navloading, navLoading] = useRecoilState(navState);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setanimeLoading(0);
+    setTimeout(() => {
+      navLoading(1);
+    }, 3000);
+  });
   const [userData, setuserData] = useState({
     username: "",
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
 
   const handleInput = (event) => {
     setuserData({ ...userData, [event.target.name]: event.target.value });
@@ -43,21 +54,23 @@ const SignUp = () => {
 
   const animateSignUp = () => {
     const tl = gsap.timeline();
-    tl.fromTo(
-      home.current,
-      {
-        height: "90%",
-        width: "90%",
-        borderRadius: "50px",
-      },
-      {
-        height: "100%",
-        width: "100%",
-        duration: 1,
-        delay: 0.5,
-        borderRadius: "0px",
-      }
-    );
+    if (animeloading === 1) {
+      tl.fromTo(
+        home.current,
+        {
+          height: "90%",
+          width: "90%",
+          borderRadius: "50px",
+        },
+        {
+          height: "100%",
+          width: "100%",
+          duration: 1,
+          delay: 0.5,
+          borderRadius: "0px",
+        }
+      );
+    }
     tl.from(Container.current, {
       y: 900,
       delay: 0.2,

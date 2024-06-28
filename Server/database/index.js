@@ -22,6 +22,11 @@ const accountSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  username: {
+    type: String,
+    ref: "User",
+    required: true,
+  },
   balance: {
     type: Number,
     required: true,

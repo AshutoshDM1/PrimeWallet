@@ -9,6 +9,8 @@ import "animate.css";
 import { getToken, loginUser } from "../services/api";
 import toast, { Toaster } from "react-hot-toast";
 import Loader from "../components/Loader";
+import { useRecoilState } from "recoil";
+import { loadingState, navState } from "../state/atoms";
 
 const Login = () => {
   useEffect(() => {
@@ -18,6 +20,15 @@ const Login = () => {
     }
   }, []);
 
+  const [animeloading, setanimeLoading] = useRecoilState(loadingState);
+  const [navloading, navLoading] = useRecoilState(navState);
+
+  useEffect(() => {
+    setanimeLoading(0);
+    setTimeout(() => {
+      navLoading(1);
+    }, 3000);
+  });
   const [loading, setLoading] = useState(false);
   const [userData, setuserData] = useState({
     username: "",
@@ -53,21 +64,25 @@ const Login = () => {
 
   const animateSignUp = () => {
     const tl = gsap.timeline();
-    tl.fromTo(
-      home.current,
-      {
-        height: "90%",
-        width: "90%",
-        borderRadius: "50px",
-      },
-      {
-        height: "100%",
-        width: "100%",
-        duration: 1,
-        delay: 0.5,
-        borderRadius: "0px",
-      }
-    );
+
+    if (animeloading === 1) {
+      tl.fromTo(
+        home.current,
+        {
+          height: "90%",
+          width: "90%",
+          borderRadius: "50px",
+        },
+        {
+          height: "100%",
+          width: "100%",
+          duration: 1,
+          delay: 0.5,
+          borderRadius: "0px",
+        }
+      );
+    }
+
     tl.from(Container.current, {
       y: 900,
       delay: 0.2,
@@ -116,10 +131,7 @@ const Login = () => {
 
   return (
     <>
-      <div
-        ref={home}
-        className="home h-screen w-full overflow-hidden rounded-20r "
-      >
+      <div ref={home} className="home h-screen w-full overflow-hidden  ">
         <NavBar />
         <div className="containerMain  overflow-hidden h-90h w-full flex items-center justify-center">
           <div

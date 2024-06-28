@@ -3,8 +3,17 @@ import heroPic from "../assets/hero2_logo.png";
 import heroPhone from "../assets/hero_phone.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
+import { loadingState, navState } from "../state/atoms";
 const Home = () => {
+
+  const [loading , setLoading] = useRecoilState(loadingState);
+  const [navloading, navLoading] = useRecoilState(navState);
+  useEffect(() => {
+    navLoading(0);
+    setLoading(1);
+  }, [setLoading, navLoading]);
   const Pic1 = useRef(null);
   const Pic2 = useRef(null);
   const headers = useRef(null);
@@ -43,6 +52,7 @@ const Home = () => {
           opacity: 1,
         }
       );
+      
       return () => {
         tl.kill();
         tl2.kill();

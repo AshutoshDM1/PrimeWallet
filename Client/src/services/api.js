@@ -1,10 +1,10 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const API_URL_User = "https://prime-wallet-server.vercel.app/api/v1/user"
-const API_URL_User2 = "https://prime-wallet-server.vercel.app/api/v1/user"
-// const API_URL_User = "http://localhost:3000/api/v1/user";
-// const API_URL_User2 = "http://localhost:3000/api/v1/account";
+// const API_URL_User = "https://prime-wallet-server.vercel.app/api/v1/user"
+// const API_URL_User2 = "https://prime-wallet-server.vercel.app/api/v1/account"
+const API_URL_User = "http://localhost:3000/api/v1/user";
+const API_URL_User2 = "http://localhost:3000/api/v1/account";
 
 export const signUpUser = async (userData) => {
   try {

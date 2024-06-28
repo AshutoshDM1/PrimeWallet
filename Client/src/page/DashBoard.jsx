@@ -1,49 +1,32 @@
-import { useEffect, useState } from "react";
-import NavBar from "../components/Navbar";
-import { useRecoilState, useRecoilStateLoadable, useRecoilValue } from "recoil";
-import { dashBoardState, usersState } from "../state/atoms";
+import { useRecoilStateLoadable, useRecoilValue } from "recoil";
+import { balanceState, dashBoardState, usersState } from "../state/atoms";
 import SideNavs from "../components/SideNavs.jsx";
 import { Avatar, Button, Input, TextField } from "@mui/material";
 import pic from "../assets/classroom of elit eprofile pic-min.png";
 import { useNavigate } from "react-router-dom";
 import "../components/style/dashboard.css";
 import Loader from "../components/Loader.jsx";
-import toast from "react-hot-toast";
-import { getToken } from "../services/api.js";
-import { getAccountBalanceSelector } from "../state/selector.js";
+
 
 const DashBoard = () => {
   const navigate = useNavigate();
   const SideNav = useRecoilValue(dashBoardState);
-  const [Balance, setBalance] = useRecoilStateLoadable(getAccountBalanceSelector);
+  const [Balance, setBalance] = useRecoilStateLoadable(
+    balanceState
+  );
   const [userList, setUserList] = useRecoilStateLoadable(usersState);
-  useEffect(() => {
-    const token = getToken();
-    if (token !== null) {
-      toast.success("You are already logged in!");
-    } else {
-      toast.error("You Dont have Auth Token Plz Login Again");
-      toast.error("We Are Redirecting to Home Page in 10 sec");
-      setTimeout(() => {
-        toast.error("Home Page Plz Login again");
-        navigate("/");
-      }, 10000);
-    }
-  }, []);
+
+  const handleSendMoney = (userId) => {
+    navigate(`/dashboard/transaction/${userId}`);
+  };
 
   if (userList.state === "loading") {
     return <Loader />;
   }
 
   if (userList.state === "hasError") {
-    return <h1>There is a problem</h1>;
-  }
-  const handleSendMoney = (userId) => {
-    navigate(`/dashboard/transaction/${userId}`);
-  };
-  if (userList.contents.msg === "Invalid token") {
     return (
-      <div className="h-screen w-full overflow-hidden bg-white flex justify-center items-center ">
+      <div className="h-screen w-full overflow-hidden flex justify-center items-center ">
         <img
           className="h-90h "
           src="https://firebasestorage.googleapis.com/v0/b/react-minor-2.appspot.com/o/404x3.webp?alt=media&token=6ca1717f-890d-40cb-8bf0-fb8095970c82"
@@ -106,6 +89,7 @@ const DashBoard = () => {
               <div className="user_container pr-8 h-90h mt-8 text-black overflow-auto">
                 {userList.contents.allUsers.map((item, index) => (
                   <div
+                    
                     key={item._id}
                     className="h-10h flex mb-2 justify-between items-center border-b-2 border-black-500"
                   >

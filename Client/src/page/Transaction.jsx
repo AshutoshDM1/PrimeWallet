@@ -1,10 +1,13 @@
 import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
-import { transferMoney } from "../services/api";
-import { useParams } from "react-router-dom";
+import { getBalance, transferMoney } from "../services/api";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { balanceState } from "../state/atoms";
+import { useSetRecoilState } from "recoil";
 
 const Transaction = () => {
+  const setBalance = useSetRecoilState(balanceState);
+  const navigate = useNavigate();
   const { userId } = useParams();
   let [inputMoney, setInputMoney] = useState("");
   const handleInputMoney = (event) => {
@@ -13,10 +16,15 @@ const Transaction = () => {
   const handleSendMoney = async () => {
     let data = {
       to: userId,
-      amount : inputMoney 
+      amount: inputMoney,
     };
     try {
       await transferMoney(data);
+      const updatedBalance = await getBalance();
+      setBalance(updatedBalance)
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
@@ -40,6 +48,7 @@ const Transaction = () => {
                 Amount
               </InputLabel>
               <Input
+                inputMode="decimal"
                 value={inputMoney}
                 onChange={handleInputMoney}
                 placeholder="min. 1$"

@@ -19,7 +19,14 @@ const signup = async (req, res) => {
       email: email,
       password: hashedPassword,
     });
-
+    const findUser = await User.findOne({ username })
+    if (findUser) {
+      await Account.create({
+        username: findUser.username,
+        userID: findUser._id,
+        balance: 5000,
+      });
+    }
     return res.status(200).json({ message: "User SignUp Successful" });
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -39,15 +46,6 @@ const login = async (req, res) => {
           },
           jwtSecret
         );
-        const existingAccount = await Account.findOne({
-          userID: existingUser._id,
-        });
-        if (!existingAccount) {
-          await Account.create({
-            userID: existingUser._id,
-            balance: 5000,
-          });
-        }
         res.json({
           token,
         });
