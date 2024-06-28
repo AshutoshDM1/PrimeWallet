@@ -1,5 +1,4 @@
-import { atom, selector } from "recoil";
-import { getUsers } from "../services/api";
+import { atom } from "recoil";
 import { getAccountBalanceSelector, userSelector } from "./selector";
 
 export const loadingState = atom({
@@ -14,7 +13,6 @@ export const dashBoardState = atom({
   key: "dashBoardState",
   default: ["Home", "Dashboard", "History", "Profile", "Settings", "Logout"],
 });
-
 export const usersState = atom({
   key: "usersAtoms",
   default: userSelector,
@@ -24,3 +22,4 @@ export const balanceState = atom({
   key: "balanceAtoms",
   default: getAccountBalanceSelector,
 });
+

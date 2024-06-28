@@ -24,7 +24,7 @@ const Transaction = () => {
       setBalance(updatedBalance)
       setTimeout(() => {
         navigate("/dashboard");
-      }, 2000);
+      }, 500);
     } catch (err) {
       console.log(err);
     }

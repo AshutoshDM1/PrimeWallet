@@ -1,19 +1,17 @@
 import { useRecoilStateLoadable, useRecoilValue } from "recoil";
 import { balanceState, dashBoardState, usersState } from "../state/atoms";
-import SideNavs from "../components/SideNavs.jsx";
 import { Avatar, Button, Input, TextField } from "@mui/material";
 import pic from "../assets/classroom of elit eprofile pic-min.png";
 import { useNavigate } from "react-router-dom";
 import "../components/style/dashboard.css";
 import Loader from "../components/Loader.jsx";
-
+import SideNav from "../components/SideNavMain.jsx";
+import { ErrorPage } from "../components/ErrorPage.jsx";
 
 const DashBoard = () => {
   const navigate = useNavigate();
-  const SideNav = useRecoilValue(dashBoardState);
-  const [Balance, setBalance] = useRecoilStateLoadable(
-    balanceState
-  );
+
+  const [Balance, setBalance] = useRecoilStateLoadable(balanceState);
   const [userList, setUserList] = useRecoilStateLoadable(usersState);
 
   const handleSendMoney = (userId) => {
@@ -26,35 +24,16 @@ const DashBoard = () => {
 
   if (userList.state === "hasError") {
     return (
-      <div className="h-screen w-full overflow-hidden flex justify-center items-center ">
-        <img
-          className="h-90h "
-          src="https://firebasestorage.googleapis.com/v0/b/react-minor-2.appspot.com/o/404x3.webp?alt=media&token=6ca1717f-890d-40cb-8bf0-fb8095970c82"
-          alt="error pic"
-        />
-      </div>
+      <>
+      <ErrorPage/>
+      </>
     );
   }
 
   return (
     <div className="h-screen w-full flex text-white bg-white">
-      <div className="side_nav h-full w-20w flex flex-col justify-center bg-purple-700">
-        <div className="h-10h mt-8 w-80w flex items-center justify-evenly logo cursor-pointer">
-          <img
-            className="w-4vw object-cover"
-            src="/wallet_logo.png"
-            alt="Wallet Logo"
-          />
-          <h1 className="ml-5 min-h-fit font-bold text-2vw">PrimeWallet</h1>
-        </div>
-        <div className="side_nav_main h-90h w-full">
-          <div className="h-90h mt-16 w-full flex flex-col gap-1vw items-center">
-            {SideNav.map((item, index) => (
-              <SideNavs key={index} SideNav_Title={item} />
-            ))}
-          </div>
-        </div>
-      </div>
+      <SideNav />
+
       <div className="dashboard_main h-full w-80w">
         <div className="dashboard_nav h-10h w-full flex justify-center items-center">
           <div className="h-80h w-90w -400 flex justify-between items-center text-black">
@@ -89,7 +68,6 @@ const DashBoard = () => {
               <div className="user_container pr-8 h-90h mt-8 text-black overflow-auto">
                 {userList.contents.allUsers.map((item, index) => (
                   <div
-                    
                     key={item._id}
                     className="h-10h flex mb-2 justify-between items-center border-b-2 border-black-500"
                   >
