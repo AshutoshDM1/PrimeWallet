@@ -50,6 +50,8 @@ export default {
       },
       borderRadius: {
         "20r": "50px",
+        "15r": "30px",
+        "10r": "15px",
       },
       fontSize: {
         "1vw": "1vw",

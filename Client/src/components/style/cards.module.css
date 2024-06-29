@@ -1,0 +1,34 @@
+.cards1 {
+  height: 52vh;
+  width: 33vh;
+  position: absolute;
+  z-index: 3;
+}
+.cards2 {
+  height: 52vh;
+  width: 33vh;
+  position: absolute;
+  z-index: 2;
+}
+.cards3 {
+  height: 52vh;
+  width: 33vh;
+  position: absolute;
+  z-index: 1;
+}
+
+.card_main1 {
+  background: linear-gradient(180deg, #c400d6 0%, rgb(234, 132, 255) 40%);
+  /* background: white; */
+  color: black;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+.card_main2 {
+  background: rgb(0, 95, 212);
+  opacity: 0;
+} 
+.card_main3 {
+  background: rgb(200, 0, 120);
+  opacity: 0;
+
+}

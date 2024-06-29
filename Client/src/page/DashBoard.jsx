@@ -1,11 +1,11 @@
-import { useRecoilStateLoadable, useRecoilValue } from "recoil";
-import { balanceState, dashBoardState, usersState } from "../state/atoms";
-import { Avatar, Button, Input, TextField } from "@mui/material";
+import { useRecoilStateLoadable} from "recoil";
+import { balanceState, usersState } from "../state/atoms";
 import pic from "../assets/classroom of elit eprofile pic-min.png";
 import { useNavigate } from "react-router-dom";
 import "../components/style/dashboard.css";
 import Loader from "../components/Loader.jsx";
 import SideNav from "../components/SideNavMain.jsx";
+import Cards from "../components/Cards.jsx";
 import { ErrorPage } from "../components/ErrorPage.jsx";
 
 const DashBoard = () => {
@@ -25,7 +25,7 @@ const DashBoard = () => {
   if (userList.state === "hasError") {
     return (
       <>
-      <ErrorPage/>
+        <ErrorPage />
       </>
     );
   }
@@ -33,27 +33,17 @@ const DashBoard = () => {
   return (
     <div className="h-screen w-full flex text-white bg-white">
       <SideNav />
-
       <div className="dashboard_main h-full w-80w">
         <div className="dashboard_nav h-10h w-full flex justify-center items-center">
           <div className="h-80h w-90w -400 flex justify-between items-center text-black">
             <h1 className="ml-5 min-h-fit font-bold text-2vw">Dashboard</h1>
-            <div className="h-70h w-60w bg-white flex justify-center items-center rounded-lg">
-              <TextField
-                size="small"
-                name="Search Users"
-                className="w-88w h-70h input bg-white rounded-none"
-                id="outlined-basic"
-                label="Search Users"
-                variant="outlined"
+            <div className="h-70h w-60w  flex justify-center items-center rounded-lg">
+              <input
+                type="text"
+                className="w-80w py-2 pl-3 rounded-10r focus:outline-none border "
+                placeholder="Search Friend"
               />
-              <Button
-                className="w-10w h-70h rounded-lg"
-                variant="contained"
-                color="primary"
-              >
-                Search
-              </Button>
+              <button className="text-black text-1vw font-medium w-10w bg-white h-80h m-4 rounded-15r " >Search</button>
             </div>
             <img
               className="h-full rounded-full bg-white overflow-hidden"
@@ -91,6 +81,9 @@ const DashBoard = () => {
               <h1 className="h-10h font-bold text-1.5vw">
                 ${Balance.contents.balance}
               </h1>
+            </div>
+            <div className="h-70h mt-4 w-90w flex items-center justify-center text-black">
+              <Cards />
             </div>
           </div>
         </div>
