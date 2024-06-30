@@ -67,3 +67,8 @@ h1:focus {
   font-size: 2.8vw;
   font-style: normal;
 }
+.username {
+  font-family: "Covered By Your Grace", cursive;
+  font-weight: 500;
+  font-style: normal;
+}

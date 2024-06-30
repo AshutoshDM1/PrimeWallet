@@ -11,7 +11,7 @@ export const navState = atom({
 });
 export const dashBoardState = atom({
   key: "dashBoardState",
-  default: ["Home", "Dashboard", "History", "Profile", "Settings", "Logout"],
+  default: ["Home", "Dashboard", "History", "Profile", "Add Money", "Logout"],
 });
 export const usersState = atom({
   key: "usersAtoms",

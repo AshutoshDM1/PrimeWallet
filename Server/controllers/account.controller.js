@@ -25,6 +25,35 @@ const getAccountBalance = async (req, res) => {
     return res.status(500).json({ message: 'Something went wrong', error: err.message });
   }
 };
+const addMoney = async (req, res) => {
+  try {
+    const { amount } = req.body; // Destructure the amount from the request body
+    const authHeader = req.headers.authorization;
+    const username = await jwt_decrypt(authHeader);
+
+    if (!username) {
+      return res.status(401).json({ message: 'Unauthorized access' });
+    }
+
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const account = await Account.findOne({ userID: user._id });
+    if (!account) {
+      return res.status(404).json({ message: 'Account not found' });
+    }
+
+    account.balance += parseFloat(amount);
+    await account.save();
+
+    return res.status(200).json({ message: `Successfully added to your account balance is ${account.balance} ` });
+  } catch (err) {
+    return res.status(500).json({ message: 'Something went wrong', error: err.message });
+  }
+};
+
 
 
 const transferMoney = async (req, res) => {
@@ -73,4 +102,4 @@ const getTransactionHistory = (req, res) => {
   res.json({ message: "Successful" });
 };
 
-export { getAccountBalance, transferMoney, getTransactionHistory };
+export { getAccountBalance, transferMoney, addMoney , getTransactionHistory };

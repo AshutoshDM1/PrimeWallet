@@ -10,6 +10,8 @@ import { Toaster } from "react-hot-toast";
 import DashBoard from "./page/DashBoard";
 import Transaction from "./page/Transaction.jsx";
 import MainPic from "./assets/Main_bg.jpg";
+import Profile from "./page/Profile.jsx";
+import AddMoney from "./page/AddMoney.jsx";
 
 function App() {
   const cursorCircle = useRef(null);
@@ -43,6 +45,8 @@ function App() {
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<DashBoard />} />
+                <Route path="/edit-profile" element={<Profile />} />
+                <Route path="/add-money" element={<AddMoney />} />
                 <Route path="/dashboard/transaction/:userId" element={<Transaction />} />
               </Routes>
             </BrowserRouter>

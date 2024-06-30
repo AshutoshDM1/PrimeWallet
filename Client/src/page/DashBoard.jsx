@@ -7,6 +7,7 @@ import Loader from "../components/Loader.jsx";
 import SideNav from "../components/SideNavMain.jsx";
 import Cards from "../components/Cards.jsx";
 import { ErrorPage } from "../components/ErrorPage.jsx";
+import { getUsername } from "../services/api.js";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const DashBoard = () => {
   const handleSendMoney = (userId) => {
     navigate(`/dashboard/transaction/${userId}`);
   };
-
+  const username = getUsername();
   if (userList.state === "loading") {
     return <Loader />;
   }
@@ -45,6 +46,7 @@ const DashBoard = () => {
               />
               <button className="text-black text-1vw font-medium w-10w bg-white h-80h m-4 rounded-15r " >Search</button>
             </div>
+            <h1 className="username text-black font-semibold text-2vw h-full mt-6 w-fit text-center " >{username}</h1>
             <img
               className="h-full rounded-full bg-white overflow-hidden"
               src={pic}
@@ -56,7 +58,7 @@ const DashBoard = () => {
             <div className="user_container_main bg-white h-90h w-80w">
               <h1 className="h-5h font-bold text-1.5vw">Send Money</h1>
               <div className="user_container pr-8 h-90h mt-8 text-black overflow-auto">
-                {userList.contents.allUsers.map((item, index) => (
+                {userList.contents.map((item, index) => (
                   <div
                     key={item._id}
                     className="h-10h flex mb-2 justify-between items-center border-b-2 border-black-500"

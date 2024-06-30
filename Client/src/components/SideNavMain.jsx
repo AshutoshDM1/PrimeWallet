@@ -22,6 +22,7 @@ const SideNav = () => {
         opacity: 0,
       },
       {
+        visibility: "visible",
         opacity:1,
         x:0,
         duration: 0.3,

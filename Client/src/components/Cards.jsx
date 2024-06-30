@@ -19,18 +19,22 @@ const Cards = () => {
         x: 30,
       },
       {
+        delay:3,
+        duration: 1,
         opacity: 1,
         rotate: 0,
         x: 30,
       }
     );
     tl.to(card2.current, {
+      duration: .5,
       delay: 0.3,
       opacity: 1,
       x: 30,
       rotation: 10,
     });
     tl.to(card3.current, {
+      duration: .5,
       delay: 0.3,
       opacity: 1,
       x: 48,

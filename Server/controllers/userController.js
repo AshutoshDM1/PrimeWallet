@@ -2,6 +2,7 @@ import { Account, User } from "../database/index.js";
 import config from "../config/index.js";
 import jwt from "jsonwebtoken";
 import { hashingPass, checkHashingPass } from "../utils/bcryptUtils.js";
+import jwt_decrypt from "../utils/jwt_decrypt.js";
 
 const jwtSecret = config.jwtSecret;
 const signup = async (req, res) => {
@@ -19,7 +20,7 @@ const signup = async (req, res) => {
       email: email,
       password: hashedPassword,
     });
-    const findUser = await User.findOne({ username })
+    const findUser = await User.findOne({ username });
     if (findUser) {
       await Account.create({
         username: findUser.username,
@@ -48,6 +49,8 @@ const login = async (req, res) => {
         );
         res.json({
           token,
+          username: existingUser.username,
+          email: existingUser.email,
         });
       } else if (match === false) {
         res.status(411).json({
@@ -69,5 +72,46 @@ const users = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+const user = async (req, res) => {
+  try {
+    const {existingUsername , username, email, password } = req.body;
+    const userRecord = await User.findOne({ username: existingUsername });
+    if (!userRecord) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const existingUser_id = userRecord._id;
 
-export { signup, login, users };
+    let updateData = { username, email };
+
+    if (password) {
+      const hashedpassword = await hashingPass(password);
+      updateData.password = hashedpassword;
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: existingUser_id },
+      updateData,
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const token = jwt.sign(
+      {
+        username,
+      },
+      jwtSecret
+    );
+    res
+      .status(200)
+      .json({
+        message: "User Profile Updated Successfully",
+        username: updatedUser.username,
+        token,
+      });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+export { signup, login, users, user };

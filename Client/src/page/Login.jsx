@@ -11,8 +11,11 @@ import toast, { Toaster } from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useRecoilState } from "recoil";
 import { loadingState, navState } from "../state/atoms";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
   useEffect(() => {
     const token = getToken();
     if (token !== null) {
@@ -221,8 +224,12 @@ const Login = () => {
                         Login
                       </button>
                       <div className="text2 h-50h w-60w overflow-hidden text-black flex items-center justify-evenly text-1vw font-medium">
-                        <h1>Doesn't Have Accoute </h1>
-                        <span className="text-blue-500  cursor-pointer hover:text-blue-400">
+                        <h1>Doesn't Have Account </h1>
+                        <span 
+                        onClick={()=> {
+                          navigate("/signup")
+                        }}
+                        className="text-blue-700  cursor-pointer hover:text-blue-400">
                           {" "}
                           Register For Free{" "}
                         </span>
