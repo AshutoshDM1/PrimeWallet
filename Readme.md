@@ -3,6 +3,9 @@
 ### Its a Wallet Type Website in Which 
 ### You Can Store Your Money And You Can Also Send to Your Friends and Family Members.
 
+### Note - How to use the Website 
+#### -> SignUp -> Login -> Get Started 
+
 ## Tech Stack
 ![Prime Wallet Pic](https://firebasestorage.googleapis.com/v0/b/react-minor-2.appspot.com/o/Prime%20Wallet%2Fpaytm_map.png?alt=media&token=82bc8dec-baa7-4f32-9f15-01293f37e753)
 ## Some Photos
